@@ -1,0 +1,10 @@
+
+> priyanka@0.0.0 build
+> tsc -b && vite build
+
+src/components/ui/pagination.tsx(5,10): error TS1484: 'ButtonProps' is a type and must be imported using a type-only import when 'verbatimModuleSyntax' is enabled.
+src/components/ui/resizable.tsx(11,51): error TS2339: Property 'PanelGroup' does not exist on type 'typeof import("D:/priyanka/node_modules/react-resizable-panels/dist/react-resizable-panels")'.
+src/components/ui/resizable.tsx(12,23): error TS2339: Property 'PanelGroup' does not exist on type 'typeof import("D:/priyanka/node_modules/react-resizable-panels/dist/react-resizable-panels")'.
+src/components/ui/resizable.tsx(27,51): error TS2339: Property 'PanelResizeHandle' does not exist on type 'typeof import("D:/priyanka/node_modules/react-resizable-panels/dist/react-resizable-panels")'.
+src/components/ui/resizable.tsx(30,23): error TS2339: Property 'PanelResizeHandle' does not exist on type 'typeof import("D:/priyanka/node_modules/react-resizable-panels/dist/react-resizable-panels")'.
+src/components/ui/resizable.tsx(42,24): error TS2339: Property 'PanelResizeHandle' does not exist on type 'typeof import("D:/priyanka/node_modules/react-resizable-panels/dist/react-resizable-panels")'.

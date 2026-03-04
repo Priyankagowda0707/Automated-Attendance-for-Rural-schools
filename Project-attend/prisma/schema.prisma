@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model School {
+  id        String    @id @default(uuid())
+  name      String
+  address   String?
+  district  String?
+  state     String?
+  pincode   String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  teachers  Teacher[]
+  students  Student[]
+}
+
+model Teacher {
+  id         String       @id @default(uuid())
+  name       String
+  email      String       @unique
+  password   String
+  schoolId   String
+  school     School       @relation(fields: [schoolId], references: [id])
+  attendance Attendance[]
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+}
+
+model Student {
+  id          String       @id @default(uuid())
+  name        String
+  rollNo      String
+  class       String
+  section     String
+  gender      String?
+  parentPhone String?
+  photoUrl    String?
+  rfidTag     String?      @unique
+  schoolId    String
+  school      School       @relation(fields: [schoolId], references: [id])
+  attendance  Attendance[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@unique([rollNo, schoolId, class, section])
+  @@index([schoolId, class, section])
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  LATE
+}
+
+model Attendance {
+  id        String           @id @default(uuid())
+  date      DateTime
+  status    AttendanceStatus
+  studentId String
+  student   Student          @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  teacherId String?
+  teacher   Teacher?         @relation(fields: [teacherId], references: [id])
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  @@unique([studentId, date])
+  @@index([studentId, date])
+  @@index([date])
+}
